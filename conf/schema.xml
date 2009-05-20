@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurations>
   <configuration>
-    <name>cm</name>
+    <name>local</name>
     <description>Configuration for the HBase cluster.</description>
     <hadoop_master>localhost</hadoop_master>
     <hadoop_job_tracker>localhost</hadoop_job_tracker>
     <hbase_master>localhost</hbase_master>
     <schema>
       <table>
-        <name>table</name>
-        <table_name>tblname</table_name>
+        <name>tablename</name>
         <description>A table.</description>
         <column_family>
-          <name>colA</name>
+          <name>columnA</name>
           <description>Column A.</description>
           <!-- Default: 3 -->
           <max_versions/>
