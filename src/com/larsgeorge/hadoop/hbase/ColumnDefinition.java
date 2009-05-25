@@ -34,7 +34,6 @@ public class ColumnDefinition {
   private static final boolean DEF_BLOOM_FILTER  = HColumnDescriptor.DEFAULT_BLOOMFILTER;
 
   private String name;
-  private String tableName;
   private String description;
   private int maxVersions = DEF_MAX_VERSIONS;
   private CompressionType compressionType = DEF_COMPRESSION_TYPE;
@@ -56,14 +55,6 @@ public class ColumnDefinition {
     this.name = name;
   }
   
-  public String getTableName() {
-    return tableName;
-  }
-
-  public void setTableName(String tableName) {
-    this.tableName = tableName;
-  }
-
   public String getDescription() {
     return description;
   }
@@ -131,7 +122,6 @@ public class ColumnDefinition {
   @Override
   public String toString() {
     return "name -> " + name + 
-      "\n  tableName -> " + tableName + 
       "\n  description -> " + description + 
       "\n  maxVersions -> " + maxVersions +
       "\n  compressionType -> " + compressionType + 

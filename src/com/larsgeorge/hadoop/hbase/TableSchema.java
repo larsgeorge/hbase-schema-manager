@@ -17,7 +17,6 @@ public class TableSchema {
 
   private String name = null;
   private String description = null;
-  private String tableName = null;
   private HashMap<String, ColumnDefinition> columns = new HashMap<String, ColumnDefinition>();
   
   public String getName() {
@@ -36,14 +35,6 @@ public class TableSchema {
     this.description = description;
   }
   
-  public String getTableName() {
-    return tableName;
-  }
-  
-  public void setTableName(String tableName) {
-    this.tableName = tableName;
-  }
-
   public void addColumn(ColumnDefinition column) {
     columns.put(column.getName(), column);
   }
@@ -59,7 +50,7 @@ public class TableSchema {
   @Override
   public String toString() {
     return "name -> " + name + "\n  description -> " + description + 
-      "\n  tableName -> " + tableName + "\n  columns -> " + columns;
+      "\n  columns -> " + columns;
   }
 
 } // TableSchema

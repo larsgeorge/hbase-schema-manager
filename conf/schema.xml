@@ -3,8 +3,6 @@
   <configuration>
     <name>local</name>
     <description>Configuration for the HBase cluster.</description>
-    <hadoop_master>localhost</hadoop_master>
-    <hadoop_job_tracker>localhost</hadoop_job_tracker>
     <hbase_master>localhost</hbase_master>
     <schema>
       <table>
