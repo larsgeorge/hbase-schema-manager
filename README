@@ -1,1 +1,20 @@
-A small application that allows to create and change HBase tables using an external XML schema file.
+A small application that allows to create and change HBase tables using an external XML schema file. 
+
+See the sample schema.xml for a start. You can define as many named configurations within one schema file as you wish. The same is true for tables and, within each table, the column family definitions. Once you have created your schema file use it like this:
+
+
+  java -jar hbase-manager.jar <schema-xml-filename> [<configuration-name>] [<options>]
+
+where "options" can be
+
+  -l	--list		list tables only, do not change anything
+  -n	--nocreate	do not create new tables or change anything
+  -v	--verbose	print verbose output
+
+Notes:
+  If no configuration name was given then the first one found is used.
+
+Example:
+
+
+  java -jar hbase-manager.jar schema.xml -v -l
