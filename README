@@ -3,7 +3,7 @@ A small application that allows to create and change HBase tables using an exter
 See the sample schema.xml for a start. You can define as many named configurations within one schema file as you wish. The same is true for tables and, within each table, the column family definitions. Once you have created your schema file use it like this:
 
 
-  java -jar hbase-manager.jar <schema-xml-filename> [<configuration-name>] [<options>]
+  java -jar hbase-manager-1.0.jar [<options>] <schema-xml-filename> [<configuration-name>]
 
 where "options" can be
 
@@ -17,4 +17,7 @@ Notes:
 Example:
 
 
-  java -jar hbase-manager.jar schema.xml -v -l
+  java -jar hbase-manager-1.0.jar -v -l schema.xml
+
+
+More info can be found here http://www.larsgeorge.com/2009/05/hbase-schema-manager.html
