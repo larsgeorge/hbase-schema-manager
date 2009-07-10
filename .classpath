@@ -3,11 +3,12 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/commons-configuration-1.6.jar"/>
-	<classpathentry kind="lib" path="lib/hbase-0.19.2.jar"/>
 	<classpathentry kind="lib" path="lib/commons-cli-1.2.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang-2.4.jar"/>
 	<classpathentry kind="lib" path="lib/commons-collections-3.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/hadoop-0.19.1-core.jar"/>
+	<classpathentry kind="lib" path="lib/hadoop-0.20.0-core.jar"/>
+	<classpathentry kind="lib" path="lib/hbase-0.20.0-dev-test.jar"/>
+	<classpathentry kind="lib" path="lib/hbase-0.20.0-dev.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

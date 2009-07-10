@@ -22,7 +22,6 @@ import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
-import org.apache.hadoop.hbase.HColumnDescriptor.CompressionType;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.apache.hadoop.hbase.util.Bytes;
 
@@ -76,9 +75,8 @@ public class HbaseManager {
    * 
    * @param args  The parameters to parse.
    * @throws ParseException When the parsing of the parameters fails.
-   * @throws ConfigurationException When the XML based configuration is broken.
    */
-  private void parseArgs(String[] args) throws ParseException, ConfigurationException {
+  private void parseArgs(String[] args) throws ParseException {
     // create options
     Options options = new Options();
     options.addOption("l", "list", false, "lists all tables but performs no further action.");
@@ -115,24 +113,24 @@ public class HbaseManager {
         String val = config.getString(base2 + "max_versions");
         if (val != null && val.length() > 0) 
           cd.setMaxVersions(Integer.parseInt(val));
-        val = config.getString(base2 + "compression_type");
+        val = config.getString(base2 + "compression");
         if (val != null && val.length() > 0) 
-          cd.setCompressionType(CompressionType.valueOf(val));
+          cd.setCompression(val);
         val = config.getString(base2 + "in_memory");
         if (val != null && val.length() > 0) 
           cd.setInMemory(Boolean.parseBoolean(val));
         val = config.getString(base2 + "block_cache_enabled");
         if (val != null && val.length() > 0) 
           cd.setBlockCacheEnabled(Boolean.parseBoolean(val));
+        val = config.getString(base2 + "block_size");
+        if (val != null && val.length() > 0) 
+          cd.setBlockSize(Integer.parseInt(val));
         val = config.getString(base2 + "time_to_live");
         if (val != null && val.length() > 0) 
           cd.setTimeToLive(Integer.parseInt(val));
-        val = config.getString(base2 + "max_value_length");
+        val = config.getString(base2 + "bloom_filter");
         if (val != null && val.length() > 0) 
-          cd.setMaxValueLength(Integer.parseInt(val));
-        // FIXME - Add type, numEntries as separate values to col schema? lg
-        //if (config.containsKey(base2 + "bloom_filter"))
-        //  cd.setBloomFilter(BloomFilterType.valueOf(config.getString(base2 + "bloom_filter")));
+          cd.setBloomFilter(Boolean.parseBoolean(val));
         ts.addColumn(cd);
       }
       schemas.add(ts);
@@ -181,6 +179,7 @@ public class HbaseManager {
    * @param name  The name to look for.
    * @return The matched number.
    */
+  @SuppressWarnings("unchecked")
   private int getConfigurationNumber(XMLConfiguration config, String name) {
     if (name == null) return -1;
     Object p = config.getProperty("configuration.name");
@@ -270,8 +269,9 @@ public class HbaseManager {
     desc = new HTableDescriptor(schema.getName());
     Collection<ColumnDefinition> cols = schema.getColumns();
     for (ColumnDefinition col : cols) {
-      HColumnDescriptor cd = new HColumnDescriptor(Bytes.toBytes(col.getColumnName()), col.getMaxVersions(), 
-        col.getCompressionType(), col.isInMemory(), col.isBlockCacheEnabled(), col.getMaxValueLength(), 
+      HColumnDescriptor cd = new HColumnDescriptor(Bytes.toBytes(
+        col.getColumnName()), col.getMaxVersions(), col.getCompression(), 
+        col.isInMemory(), col.isBlockCacheEnabled(), col.getBlockSize(),
         col.getTimeToLive(), col.isBloomFilter());
       desc.addFamily(cd);
     }

@@ -8,7 +8,6 @@
 package com.larsgeorge.hadoop.hbase;
 
 import org.apache.hadoop.hbase.HColumnDescriptor;
-import org.apache.hadoop.hbase.HColumnDescriptor.CompressionType;
 
 /**
  * Describes a column and its features.
@@ -21,13 +20,13 @@ public class ColumnDefinition {
   /** Default values for HBase. */
   private static final int DEF_MAX_VERSIONS      = HColumnDescriptor.DEFAULT_VERSIONS;
   /** Default values for HBase. */
-  private static final CompressionType DEF_COMPRESSION_TYPE = HColumnDescriptor.DEFAULT_COMPRESSION;
+  private static final String DEF_COMPRESSION    = HColumnDescriptor.DEFAULT_COMPRESSION;
   /** Default values for HBase. */
   private static final boolean DEF_IN_MEMORY     = HColumnDescriptor.DEFAULT_IN_MEMORY;
   /** Default values for HBase. */
   private static final boolean DEF_BLOCKCACHE_ENABLED = HColumnDescriptor.DEFAULT_BLOCKCACHE;
   /** Default values for HBase. */
-  private static final int DEF_MAX_VALUE_LENGTH  = HColumnDescriptor.DEFAULT_LENGTH;
+  private static final int DEF_BLOCKSIZE         = HColumnDescriptor.DEFAULT_BLOCKSIZE;
   /** Default values for HBase. */
   private static final int DEF_TIME_TO_LIVE      = HColumnDescriptor.DEFAULT_TTL;
   /** Default values for HBase. */
@@ -36,10 +35,10 @@ public class ColumnDefinition {
   private String name;
   private String description;
   private int maxVersions = DEF_MAX_VERSIONS;
-  private CompressionType compressionType = DEF_COMPRESSION_TYPE;
+  private String compression = DEF_COMPRESSION;
   private boolean inMemory = DEF_IN_MEMORY;
   private boolean blockCacheEnabled = DEF_BLOCKCACHE_ENABLED;
-  private int maxValueLength = DEF_MAX_VALUE_LENGTH;
+  private int blockSize = DEF_BLOCKSIZE;
   private int timeToLive = DEF_TIME_TO_LIVE;
   private boolean bloomFilter = DEF_BLOOM_FILTER;
   
@@ -71,12 +70,12 @@ public class ColumnDefinition {
     this.maxVersions = maxVersions;
   }
 
-  public CompressionType getCompressionType() {
-    return compressionType;
+  public String getCompression() {
+    return compression;
   }
 
-  public void setCompressionType(CompressionType compressionType) {
-    this.compressionType = compressionType;
+  public void setCompression(String compression) {
+    this.compression = compression;
   }
   
   public boolean isInMemory() {
@@ -95,6 +94,14 @@ public class ColumnDefinition {
     this.blockCacheEnabled = blockCacheEnabled;
   }
 
+  public void setBlockSize(int blockSize) {
+    this.blockSize = blockSize;
+  }
+
+  public int getBlockSize() {
+    return blockSize;
+  }
+
   public int getTimeToLive() {
     return timeToLive;
   }
@@ -111,23 +118,15 @@ public class ColumnDefinition {
     this.bloomFilter = bloomFilter;
   }
 
-  public int getMaxValueLength() {
-    return maxValueLength;
-  }
-
-  public void setMaxValueLength(int maxValueLength) {
-    this.maxValueLength = maxValueLength;
-  }
-
   @Override
   public String toString() {
     return "name -> " + name + 
       "\n  description -> " + description + 
       "\n  maxVersions -> " + maxVersions +
-      "\n  compressionType -> " + compressionType + 
+      "\n  compression -> " + compression + 
       "\n  inMemory -> " + inMemory +
       "\n  blockCacheEnabled -> " + blockCacheEnabled + 
-      "\n  maxValueLength -> " +  maxValueLength + 
+      "\n  blockSize -> " + blockSize + 
       "\n  timeToLive -> " +  timeToLive + 
       "\n  bloomFilter -> " + bloomFilter;
   }

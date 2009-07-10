@@ -13,17 +13,17 @@
           <description>Column A.</description>
           <!-- Default: 3 -->
           <max_versions/>
-          <!-- Default: DEFAULT_COMPRESSION_TYPE -->
-          <compression_type/>
+          <!-- Default: None -->
+          <compression/>
           <!-- Default: false -->
           <in_memory/>
-          <!-- Default: false -->
+          <!-- Default: true -->
           <block_cache_enabled/>
-          <!-- Default: -1 (forever) -->
+          <!-- Default: 64k -->
+          <block_size/>
+          <!-- Default: Integer.MAX_VALUE (forever) -->
           <time_to_live/>
-          <!-- Default: 2147483647 -->
-          <max_value_length/>
-          <!-- Default: DEFAULT_BLOOM_FILTER_DESCRIPTOR -->
+          <!-- Default: false -->
           <bloom_filter/>
         </column_family>
       </table>
