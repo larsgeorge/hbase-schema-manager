@@ -4,7 +4,7 @@
     <options buildIfNeeded="true" compress="true" descriptionLocation="/hbase-schema-manager/hbase-manager.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
-    <manifest generateManifest="true" mainClassHandleIdentifier="=hbase-schema-manager/src&lt;com.larsgeorge.hadoop.hbase{HbaseManager.java[HbaseManager" manifestLocation="/collective-media/src/META-INF/import/MANIFEST.MF" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
+    <manifest generateManifest="true" mainClassHandleIdentifier="=hbase-schema-manager/src&lt;com.larsgeorge.hadoop.hbase{HBaseManager.java[HBaseManager" manifestLocation="/collective-media/src/META-INF/import/MANIFEST.MF" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
         <sealing sealJar="false">
             <packagesToSeal/>
             <packagesToUnSeal/>
@@ -17,5 +17,4 @@
         <file path="/hbase-schema-manager/.project"/>
         <file path="/hbase-schema-manager/.gitignore"/>
     </selectedElements>
-    <fatjar builder="org.eclipse.jdt.ui.plain_jar_builder" launchConfig=""/>
 </jardesc>

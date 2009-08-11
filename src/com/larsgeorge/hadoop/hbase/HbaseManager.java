@@ -30,7 +30,7 @@ import org.apache.hadoop.hbase.util.Bytes;
  * 
  * @author Lars George
  */
-public class HbaseManager {
+public class HBaseManager {
 
   private HBaseAdmin _hbaseAdmin;
   private HBaseConfiguration _hbaseConfig = null;
@@ -52,7 +52,7 @@ public class HbaseManager {
    * @throws ParseException When the command line parameters are borked.
    * @throws ConfigurationException When the XML based configuration is broken.
    */
-  public HbaseManager(String[] args) throws ParseException, ConfigurationException {
+  public HBaseManager(String[] args) throws ParseException, ConfigurationException {
     parseArgs(args);
     verbose = cmd.hasOption("v");
     String[] rem = cmd.getArgs();
@@ -328,7 +328,7 @@ public class HbaseManager {
    */
   public static void main(String[] args) {
     try {
-      HbaseManager hm = new HbaseManager(args);
+      HBaseManager hm = new HBaseManager(args);
       hm.process();
       System.out.println("done.");
     } catch (Exception e) {
