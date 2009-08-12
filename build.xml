@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="jar" name="hbase-schema-manager">
+
+	  <property environment="env"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+    <property name="version" value="2.0"/>
+    <property name="final.name" value="hbase-manager-${version}"/>
+
+    <property name="src.dir" value="${basedir}/src"/>
+    <property name="lib.dir" value="${basedir}/lib"/>
+    <property name="build.dir" location="${basedir}/build"/>
+    <property name="build.bin" location="${build.dir}/bin"/>
+    <property name="build.lib" location="${build.dir}/lib"/>
+    <property name="build.classes" location="${build.dir}/classes"/>
+    <property name="jarfile" value="${build.dir}/${final.name}.jar" />
+
+    <fileset id="lib.jars" dir="${basedir}" includes="lib/*.jar"/>
+	  <path id="classpath">
+	      <fileset refid="lib.jars"/>
+	      <pathelement location="${build.dir}"/>
+    </path>
+
+    <target name="init">
+      <mkdir dir="${build.dir}"/>
+      <mkdir dir="${build.classes}"/>
+      <mkdir dir="${build.lib}"/>
+      <copy todir="${build.lib}">
+        <fileset dir="${lib.dir}" />
+      </copy>
+      <mkdir dir="${build.bin}"/>
+      <copy todir="${build.bin}">
+        <fileset dir="${basedir}/bin" />
+      </copy>
+      <chmod perm="ugo+x" type="file">
+        <fileset dir="${build.bin}" />
+      </chmod>
+    </target>
+
+	  <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="${build.classes}" 
+        	     source="${source}" target="${target}">
+            <src path="${src.dir}"/>
+            <classpath refid="classpath"/>
+        </javac>
+    </target>
+
+    <target name="jar" depends="compile" description="Build jar file">
+        <jar jarfile="${jarfile}" basedir="${build.dir}" >
+   	        <manifest>
+                <attribute name="Main-Class" value="com/larsgeorge/hadoop/hbase/HBaseManager" />
+            </manifest>
+        </jar>
+    </target>
+
+</project>

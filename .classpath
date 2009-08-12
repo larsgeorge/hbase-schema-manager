@@ -11,5 +11,5 @@
 	<classpathentry kind="lib" path="lib/hbase-0.20.0.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.15.jar"/>
 	<classpathentry kind="lib" path="lib/zookeeper-r785019-hbase-1329.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="output" path="build"/>
 </classpath>

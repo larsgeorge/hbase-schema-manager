@@ -6,10 +6,10 @@ TOOL_HOME="$(dirname $0)"
 
 # set up classpath
 for f in $TOOL_HOME/*.jar; do
-  CLASSPATH=${CLASSPATH}:$f;
+  CLASSPATH=${CLASSPATH}:$f
 done
 for f in $TOOL_HOME/lib/*.jar; do
-  CLASSPATH=${CLASSPATH}:$f;
+  CLASSPATH=${CLASSPATH}:$f
 done
 echo "using classpath: $CLASSPATH"
 
