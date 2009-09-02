@@ -85,7 +85,7 @@ public class HBaseManager {
     // check if we are missing parameters
     if (args.length == 0) {
       HelpFormatter formatter = new HelpFormatter();
-      formatter.printHelp("HbaseManager <schema-xml-filename> <config-name>", options);
+      formatter.printHelp("HBaseManager <schema-xml-filename> <config-name>", options);
       System.exit(-1);
     }
     CommandLineParser parser = new PosixParser();
@@ -143,11 +143,22 @@ public class HBaseManager {
    * @throws IOException When creating or changing the table fails.
    */
   private void process() throws IOException {
+    // create configuration
     _hbaseConfig = new HBaseConfiguration();
+    // assign values from XML file
     String hbaseMaster = getStringProperty("hbase_master");
-    if (hbaseMaster != null)
-      _hbaseConfig.set("hbase.master", hbaseMaster);
-    if (verbose) System.out.println(" hbase.master -> " + _hbaseConfig.get("hbase.master"));
+    String zkQuorum = getStringProperty("zookeeper_quorum");
+    String zkClientPort = getStringProperty("zookeeper_client_port");
+    if (hbaseMaster != null) _hbaseConfig.set("hbase.master", hbaseMaster);
+    if (verbose) 
+      System.out.println(" hbase.master -> " + _hbaseConfig.get("hbase.master"));
+    if (zkQuorum != null) _hbaseConfig.set("hbase.zookeeper.quorum", zkQuorum);
+    if (verbose) 
+      System.out.println(" zookeeper.quorum -> " + _hbaseConfig.get("hbase.zookeeper.quorum"));
+    if (zkClientPort != null) _hbaseConfig.set("hbase.zookeeper.property.clientPort", zkClientPort);
+    if (verbose) 
+      System.out.println(" zookeeper.clientPort -> " + _hbaseConfig.get("hbase.zookeeper.property.clientPort"));
+    // create HBase admin interface
     _hbaseAdmin = new HBaseAdmin(_hbaseConfig);
     // iterate over table schemas
     if (cmd.hasOption("l")) {

@@ -3,7 +3,8 @@
   <configuration>
     <name>local</name>
     <description>Configuration for the HBase cluster.</description>
-    <hbase_master>localhost</hbase_master>
+    <zookeeper_quorum>localhost</zookeeper_quorum>
+    <zookeeper_client_port>2181</zookeeper_client_port>
     <schema>
       <table>
         <name>tablename</name>
