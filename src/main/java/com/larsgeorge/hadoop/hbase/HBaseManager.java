@@ -7,8 +7,11 @@
 
 package com.larsgeorge.hadoop.hbase;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -249,7 +252,8 @@ public class HBaseManager {
     if (verbose) {
       System.out.println("creating configuration...");
     }
-    PrintWriter w = new PrintWriter(System.out);
+    OutputStream out = "-".equals(schemaFileName) ? System.out : new FileOutputStream(schemaFileName);
+    PrintStream w = new PrintStream(new BufferedOutputStream(out), false, "UTF-8");
     w.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
     w.println("<configurations>");
     w.println("  <configuration>");
@@ -303,6 +307,7 @@ public class HBaseManager {
     w.println("    </schema>");
     w.println("  </configuration>");
     w.println("</configurations>");
+    w.flush();
     w.close();
   }
 
