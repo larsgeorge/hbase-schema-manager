@@ -7,6 +7,14 @@
   <version>1.0.0</version>
   <name>HBase Schema Manager</name>
 
+  <url>http://github.com/larsgeorge/hbase-schema-manager</url>
+
+  <scm>
+    <url>http://github.com/larsgeorge/hbase-schema-manager</url>
+    <connection>scm:git:git://github.com/larsgeorge/hbase-schema-manager.git</connection>
+    <developerConnection>scm:git:git://github.com/larsgeorge/hbase-schema-manager.git</developerConnection>
+  </scm>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
