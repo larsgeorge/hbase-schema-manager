@@ -33,7 +33,7 @@ You can create a config from an existing cluster like so::
 
   java -jar hbase-schema-manager-1.0.0.jar -c new-schema1.xml
 
-  or
+or::
 
   java -jar hbase-schema-manager-1.0.0.jar -c -q localhost - cluster1 > new-schema2.xml
 
