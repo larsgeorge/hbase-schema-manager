@@ -61,6 +61,7 @@ public class HBaseManager {
   private HTableDescriptor[] remoteTables = null;
   private CommandLine cmd = null;
   private String quorum = null;
+  private String znode = null;
   private String zkPort = null;
 
   /**
@@ -90,6 +91,9 @@ public class HBaseManager {
       quorum = cmd.getOptionValue("q");
       if (cmd.hasOption("p")) {
         zkPort = cmd.getOptionValue("p");
+      }
+      if (cmd.hasOption("z")) {
+        znode = cmd.getOptionValue("z");
       }
       if (quorum == null) {
         System.err.println("ERROR: zookeeper quorum not specified, use -q option.");
@@ -141,6 +145,7 @@ public class HBaseManager {
     options.addOption("q", "quorum", true, "the list of quorum servers, e.g. \"foo.com,bar.com\"");
     options.addOption("p", "client-port", true, "the zookeeper client port to use, default: 2181");
     options.addOption("v", "verbose", false, "print verbose output.");
+    options.addOption("z", "znode", true, "override zookeeper.znode.parent, default: /hbase");
     // check if we are missing parameters
     if (args.length == 0) {
       final HelpFormatter formatter = new HelpFormatter();
@@ -275,6 +280,9 @@ public class HBaseManager {
     if (zkPort != null) {
       w.println("    <zookeeper_client_port>" + zkPort + "</zookeeper_client_port>");
     }
+    if (znode != null) {
+      w.println("    <zookeeper_znode>" + znode + "</zookeeper_znode>");
+    }
     w.println("    <schema>");
     // iterate over the remote tables
     getTables(true);
@@ -346,10 +354,15 @@ public class HBaseManager {
     if (p != null) {
       hbaseConfig.set("hbase.zookeeper.property.clientPort", p);
     }
+    String z = getStringProperty("zookeeper_znode", znode);
+    if (z != null) {
+      hbaseConfig.set("zookeeper.znode.parent", z);
+    }
     if (verbose) {
       System.out.println("hbase.master -> " + hbaseConfig.get("hbase.master"));
       System.out.println("zookeeper.quorum -> " + hbaseConfig.get("hbase.zookeeper.quorum"));
       System.out.println("zookeeper.clientPort -> " + hbaseConfig.get("hbase.zookeeper.property.clientPort"));
+      System.out.println("zookeeper.znode.parent -> " + hbaseConfig.get("zookeeper.znode.parent"));
     }
     return hbaseConfig;
   }
